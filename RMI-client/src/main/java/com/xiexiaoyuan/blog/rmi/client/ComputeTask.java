@@ -10,7 +10,7 @@ import java.rmi.registry.Registry;
 /**
  * Created by xiaoyuan on 2018/8/8
  */
-public class ComputePi {
+public class ComputeTask {
 
     public static void main(String[] args) throws RemoteException, NotBoundException {
         if (System.getSecurityManager() == null) {
@@ -18,8 +18,8 @@ public class ComputePi {
         }
         Registry registry = LocateRegistry.getRegistry();
         Compute compute = (Compute) registry.lookup("compute");
-        Pi pi = new Pi();
-        int result = compute.executeTask(pi);
+        TaskImpl taskImpl = new TaskImpl();
+        int result = compute.executeTask(taskImpl);
         System.out.println(result);
     }
 }

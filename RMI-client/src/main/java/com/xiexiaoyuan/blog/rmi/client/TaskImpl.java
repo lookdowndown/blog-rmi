@@ -8,7 +8,7 @@ import java.util.Random;
 /**
  * Created by xiaoyuan on 2018/8/8
  */
-public class Pi implements Task<Integer>, Serializable {
+public class TaskImpl implements Task<Integer>, Serializable {
 
     @Override
     public Integer execute() {

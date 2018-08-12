@@ -15,19 +15,21 @@ plugins {
 subprojects { subproject ->
     apply plugin: 'java'
     buildDir = 'build'
+
+    repositories {
+        maven {
+            name 'hua wei cloud'
+            url 'https://repo.huaweicloud.com/repository/maven/'
+        }
+        maven {
+            name 'aliyun maven'
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
+        mavenCentral()
+    }
 }
 
-repositories {
-    maven {
-        name 'hua wei cloud'
-        url 'https://repo.huaweicloud.com/repository/maven/'
-    }
-    maven {
-        name 'aliyun maven'
-        url 'http://maven.aliyun.com/nexus/content/groups/public/'
-    }
-    mavenCentral()
-}
+
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8

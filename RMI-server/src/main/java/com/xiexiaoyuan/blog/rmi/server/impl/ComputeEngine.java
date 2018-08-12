@@ -18,7 +18,7 @@ public class ComputeEngine implements Compute {
         return task.execute();
     }
 
-    public static void main(String[] args) throws RemoteException {
+    public static void main(String[] args) throws RemoteException, InterruptedException {
         if (System.getSecurityManager() == null)
             System.setSecurityManager(new SecurityManager());
         Compute compute = new ComputeEngine();
@@ -26,5 +26,9 @@ public class ComputeEngine implements Compute {
 
         Registry registry = LocateRegistry.getRegistry();
         registry.rebind("compute", stub);
+        while (true) {
+            Thread.sleep(5*1000);
+            System.out.println("sleep 5s");
+        }
     }
 }

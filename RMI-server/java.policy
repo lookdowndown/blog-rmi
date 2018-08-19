@@ -1,0 +1,3 @@
+grant codeBase "file:${jarPath}" {
+      permission java.security.AllPermission;
+  };

@@ -16,6 +16,7 @@ subprojects { subproject ->
     apply plugin: 'java'
     buildDir = 'build'
 
+
     repositories {
         maven {
             name 'hua wei cloud'

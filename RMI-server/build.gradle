@@ -1,0 +1,27 @@
+jar {
+    manifest {
+        attributes(
+                'Created-By': 'Gradle',
+                'Main-Class': 'com.xiexiaoyuan.blog.rmi.server.impl.ComputeEngine'
+        )
+    }
+}
+
+task runJar(dependsOn: jar) {
+    doLast {
+        String jarPath = buildDir.toString() + '/libs/RMI-server.jar'
+        javaexec {
+            main = '-jar'
+            args = [
+                    'build/libs/RMI-server.jar'
+            ]
+            systemProperties = [
+                    'jarPath'                  : jarPath,
+                    'java.rmi.server.useCodebaseOnly': false,
+                    'java.rmi.server.codebase': 'file://' + jarPath,
+                    'java.security.policy'    : projectDir.toString() + '/java.policy',
+
+            ]
+        }
+    }
+}

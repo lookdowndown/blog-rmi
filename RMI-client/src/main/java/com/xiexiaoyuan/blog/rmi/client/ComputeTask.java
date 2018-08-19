@@ -20,6 +20,6 @@ public class ComputeTask {
         Compute compute = (Compute) registry.lookup("compute");
         TaskImpl taskImpl = new TaskImpl();
         int result = compute.executeTask(taskImpl);
-        System.out.println(result);
+        System.out.println("random number:" + result);
     }
 }

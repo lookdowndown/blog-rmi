@@ -2,4 +2,39 @@ dependencies {
     implementation project(':RMI-server')
 }
 
+jar {
+    manifest {
+        attributes(
+                'Created-By': 'Gradle',
+                'Main-Class': 'com.xiexiaoyuan.blog.rmi.client.ComputeTask',
+                'Class-Path': 'RMI-server.jar'
+        )
+    }
+}
+
+task runJar(dependsOn: ['jar','copyRMIServer']) {
+    doLast {
+        String jarPath = buildDir.toString() + '/libs/RMI-client.jar'
+        javaexec {
+            main = '-jar'
+            args = [
+                    'build/libs/RMI-client.jar'
+            ]
+//            classpath = files("../RMI-server/build/libs/RMI-server.jar")
+//            classpath = sourceSets.main.runtimeClasspath
+            systemProperties = [
+                    'jarPath'                 : jarPath,
+                    'java.rmi.server.useCodebaseOnly': false,
+                    'java.rmi.server.codebase': 'file://' + jarPath,
+                    'java.security.policy'    : projectDir.toString() + '/java.policy',
+
+            ]
+        }
+    }
+}
+
+task copyRMIServer(type: Copy) {
+    from '../RMI-server/build/libs/RMI-server.jar'
+    into 'build/libs'
+}
 
